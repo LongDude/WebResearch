@@ -27,7 +27,6 @@ public class WebSecurityConfiguration {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
