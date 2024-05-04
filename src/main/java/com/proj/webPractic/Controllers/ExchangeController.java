@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/exchanges")
+@RequestMapping("/api/exchanges")
 public class ExchangeController {
     @Autowired
     private ExchangeRepository exchangeRepository;
 
-    @GetMapping("/all")
+    @GetMapping("all")
     public ResponseEntity<List<Exchange>> getAllExchanges(){
         return ResponseEntity.ok(exchangeRepository.findAll());
     }

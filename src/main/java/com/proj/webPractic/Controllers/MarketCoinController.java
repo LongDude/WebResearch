@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/marketcoins")
+@RequestMapping("/api/marketcoins")
 public class MarketCoinController {
     @Autowired
     private MarketCoinRepository marketCoinRepository;

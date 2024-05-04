@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/portfolio")
+@RequestMapping("/api/portfolio")
 public class PortfolioController {
     @Autowired
     private PortfolioRepository portfolioRepository;
