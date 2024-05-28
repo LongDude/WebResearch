@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  webres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=web-root
+      - POSTGRES_PASSWORD=r00t
+      - POSTGRES_DB=webresearch
+    volumes:
+      - pg_rest:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5433:5432"
+  app:
+    restart: always
+    build: .
+    ports:
+      - "8081:8080"
+    depends_on:
+      - webres
+    environment:
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://webres:5432/webresearch'
+      JAVA_OPTS: '-Xmx512m'
+
+volumes:
+  pg_rest:

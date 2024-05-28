@@ -34,6 +34,20 @@ public class CoinHistorySheduler {
         String time_string = json.path("time").path("updated").asText();
         boolean successful = true;
 
+
+        Iterator<MarketCoinHistory> it = marketCoinHistoryRepository.findAll().iterator();
+        while (marketCoinHistoryRepository.count() > 9){
+            MarketCoinHistory old = it.next();
+            marketCoinHistoryRepository.deleteById(old.getId());
+        }
+
+        MarketCoinHistory record = new MarketCoinHistory(
+                price_usd,
+                time_string,
+                !time_string.isEmpty() && price_usd != 0.0f
+        );
+        marketCoinHistoryRepository.save(record);
+
 // Not working
 //        SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy HH:mm:ss z");
 //        Date time;
@@ -48,18 +62,5 @@ public class CoinHistorySheduler {
 //            time = new Date(0);
 //        }
 
-
-        Iterator<MarketCoinHistory> it = marketCoinHistoryRepository.findAll().iterator();
-        while (marketCoinHistoryRepository.count() > 9){
-            MarketCoinHistory old = it.next();
-            marketCoinHistoryRepository.deleteById(old.getId());
-        }
-
-        MarketCoinHistory record = new MarketCoinHistory(
-                price_usd,
-                time_string,
-                !time_string.isEmpty() && price_usd != 0.0f
-        );
-        marketCoinHistoryRepository.save(record);
     }
 }
