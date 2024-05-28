@@ -3,6 +3,7 @@ version: '3.8'
 services:
   webres:
     image: postgres
+    container_name: postgres
     restart: always
     environment:
       - POSTGRES_USER=web-root
